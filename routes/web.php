@@ -61,7 +61,38 @@ Route::group(array('middleware' => 'auth'), function(){
     Route::get('/edit_contribution_type/{id}','ContributionTypeController@edit')->name('edit_contribution_type');
     Route::post('/edit_contribution_type/{id}','ContributionTypeController@save_edit')->name('edit_contribution_type');
     
-    Route::get('/make_contribution','ContributionController@index')->name('make_contribution');
+    Route::get('/make_contribution',function () {
+        return view('pages.initiate_contribution');
+    })->name('make_contribution');
+    Route::get('/single_contribution','ContributionController@single_contribution')->name('single_contribution');
+    Route::post('/single_contribution','ContributionController@process_single_contribution')->name('single_contribution');
+
+
+    Route::get('/department_contribution','ContributionController@department_contribution')->name('department_contribution');
+    Route::post('/department_contribution','ContributionController@process_department_contribution')->name('department_contribution');
+
+
+    Route::get('/contributions','ContributionController@index')->name('contributions');
+    Route::get('/my_contributions','ContributionController@my_contributions')->name('my_contributions');
+
+
+    Route::get('/my_withdrawals','WithdrawalController@my_withdrawals')->name('my_withdrawals');
+    Route::get('/make_withdrawal',function () {
+        return view('pages.make_withdrawal');
+    })->name('make_withdrawal');
+    Route::post('/make_withdrawal','WithdrawalController@make_withdrawal')->name('make_withdrawal');
+
+    Route::get('/withdrawals','WithdrawalController@index')->name('withdrawals');
+    Route::get('/disapprove_withdrawal/{id}','WithdrawalController@delete')->name('disapprove_withdrawal');
+    Route::get('/approve_withdrawal/{id}','WithdrawalController@approve')->name('approve_withdrawal');
+    
+    
+    
+    Route::get('/report',function () {
+        return view('pages.initiate_report');
+    })->name('report');
+    //Route::get('/report','ReportController@index')->name('report');
+    
     
 
 });

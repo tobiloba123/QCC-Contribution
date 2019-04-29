@@ -9,8 +9,16 @@
                     <li><a href="messages.php"><i class="fa fa-reply"></i> Messages </a> </li> --}}
                     <li><a href="{{ route('departments') }}"><i class="fa fa-home"></i> Departments </a> </li>
                     <li><a href="{{ route('users') }}"><i class="fa fa-group"></i> Users </a> </li>
-                    <li><a href="{{ route('contribution_types') }}"><i class="fa fa-money"></i> Contribution Types </a> </li>
+                    <li><a href="{{ route('contribution_types') }}"><i class="fa fa-tags"></i> Contribution Types </a> </li>
                     <li><a href="{{ route('make_contribution') }}"><i class="fa fa-money"></i> Make Contribution </a> </li>
+                    <li><a href="{{ route('contributions') }}"><i class="fa fa-history"></i> Contributions </a> </li>
+                    <li><a href="{{ route('my_contributions') }}"><i class="fa fa-bar-chart"></i> My Contributions </a> </li>
+
+                    <li><a href="{{ route('withdrawals') }}"><i class="fa fa-list"></i> Withdrawal Request </a> </li>
+                    <li><a href="{{ route('my_withdrawals') }}"><i class="fa fa-bank"></i> My Withdrawals </a> </li>
+
+                    <!-- Reports -->
+                    <li><a href="{{ route('report') }}"><i class="fa fa-file"></i> Report </a> </li>
   
                     <li><a href="#"><i class="fa fa-power-off"></i> Logout </a> </li>
                     

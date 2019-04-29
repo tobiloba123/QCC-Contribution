@@ -25,6 +25,6 @@
     
     @yield("styles")
     <!-- Custom Theme Style -->
-    <link href="build/css/custom.min.css" rel="stylesheet">
+    <link href="build/css/custom.css" rel="stylesheet">
 
 </head>

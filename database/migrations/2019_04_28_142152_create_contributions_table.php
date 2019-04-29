@@ -19,6 +19,7 @@ class CreateContributionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('approver_id');
             $table->unsignedBigInteger('contribution_type_id');
+            $table->string('remark')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
