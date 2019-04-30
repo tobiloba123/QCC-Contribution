@@ -23,21 +23,19 @@
             
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"></div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-            <a href="{{ route('single_contribution') }}">
+            <a href="#">
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title h3">Single Transaction</h5>
-                      <p class="card-text">Single Transaction allows you to make contribution for an employee.</p>
+                      <h5 class="card-title h3">Withdrawals Report</h5>
                     </div>
                 </div>
             </a>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-            <a href="{{ route('department_contribution') }}">
+            <a href="#">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title h3">Department Transaction</h5>
-                        <p class="card-text">You can make contribution on sll employees at any stated Department.</p>
+                        <h5 class="card-title h3">Contributions Report</h5>
                     </div>
                 </div>
             </a>
@@ -49,21 +47,19 @@
             
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"></div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-                <a href="{{ route('single_contribution') }}">
+                <a href="#">
                     <div class="card">
                         <div class="card-body">
-                          <h5 class="card-title h3">Single Transaction</h5>
-                          <p class="card-text">Single Transaction allows you to make contribution for an employee.</p>
+                          <h5 class="card-title h3">Employee Contribution</h5>
                         </div>
                     </div>
                 </a>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-                <a href="{{ route('department_contribution') }}">
+                <a href="#">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title h3">Department Transaction</h5>
-                            <p class="card-text">You can make contribution on sll employees at any stated Department.</p>
                         </div>
                     </div>
                 </a>
