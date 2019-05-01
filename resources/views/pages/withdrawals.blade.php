@@ -73,7 +73,7 @@
 @endsection
 
 
-@section("content")
+@section("scripts")
 
 <script>
     $(document).ready(function() {

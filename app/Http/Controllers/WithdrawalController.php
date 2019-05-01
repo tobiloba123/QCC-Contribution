@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Withdrawal;
 use Auth;
+use Carbon\Carbon;
 
 class WithdrawalController extends Controller
 {
@@ -12,7 +13,8 @@ class WithdrawalController extends Controller
 
 
     function index(Request $request){
-        $withdrawals = Withdrawal::with("approver","user")->where('user_id',Auth::user()->id)->paginate(20);
+        $withdrawals = Withdrawal::with("approver","user")->where('user_id',Auth::user()->id)
+        ->whereNull('approved_date')->paginate(20);
         return view('pages.withdrawals')->with(["withdrawals"=>$withdrawals]);
     }
 
@@ -36,10 +38,19 @@ class WithdrawalController extends Controller
 
     function delete(Request $request,$id){
         $withdrawal = Withdrawal::find($id);
-        $withdrawal->approver_id = Auth::user()->id;
-        $withdrawal->save();
+        //$withdrawal->approver_id = Auth::user()->id;
+        //$withdrawal->save();
         $withdrawal->delete();
         $request->session()->flash('alert-success', 'Withdrawal Request Disapproved Successfully');
+        return redirect('withdrawals');
+    }
+
+    function approve(Request $request,$id){
+        $withdrawal = Withdrawal::find($id);
+        $withdrawal->approver_id = Auth::user()->id;
+        $withdrawal->approved_date = Carbon::now();
+        $withdrawal->save();
+        $request->session()->flash('alert-success', 'Withdrawal Request Approved Successfully');
         return redirect('withdrawals');
     }
 

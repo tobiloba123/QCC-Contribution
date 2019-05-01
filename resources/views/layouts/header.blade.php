@@ -13,6 +13,7 @@
             </a>
             <ul class="dropdown-menu dropdown-usermenu pull-right">
               <li><a href="{{ route('profile') }}"> Profile</a></li>
+              <li><a href="{{ route('change_password') }}"> Change Password</a></li>
               <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
             </ul>
           </li>

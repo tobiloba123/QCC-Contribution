@@ -27,12 +27,8 @@ Route::group(array('middleware' => 'auth'), function(){
     Route::get('/dashboard','DashboardController@index');
     Route::get('/','DashboardController@index')->name('dashboard');
 
-    Route::get('/profile', function () {
-        return view('pages.profile');
-    })->name("profile");
 
-
-    Route::group(['middleware' => ['role:Admin|SuperAdmin']], function () {
+    Route::group(['middleware' => ['role:Admin|Super-Admin']], function () {
 
         Route::get('/departments','DepartmentController@index')->name('departments');
         Route::get('/add_department','DepartmentController@add')->name('add_department');
@@ -97,6 +93,21 @@ Route::group(array('middleware' => 'auth'), function(){
     })->name('make_withdrawal');
     Route::post('/make_withdrawal','WithdrawalController@make_withdrawal')->name('make_withdrawal');
 
+    Route::get('/profile','UserController@profile')->name('profile');
+
+    Route::get('/edit_profile',function () {
+        $user = Auth::user();
+        return view('pages.edit_profile')->with(["user"=>$user]);
+    })->name('edit_profile');
+    
+    Route::post('/update_profile','UserController@update_profile')->name('update_profile');
+
+    Route::get('/change_password',function () {
+        return view('pages.change_password');
+    })->name('change_password');
+
+    Route::post('/change_password','UserController@change_password')->name('change_password');
+    
     
     //Route::get('/report','ReportController@index')->name('report');
     

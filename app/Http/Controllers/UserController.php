@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Department;
 use App\UserDepartment;
+use App\Withdrawal;
+use App\Contribution;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -248,6 +250,134 @@ class UserController extends Controller
             return redirect(route('edit_user',$id));
 
         }
+
+    }
+
+
+
+
+
+
+
+    function profile(Request $request){
+
+        $user = User::with('user_department.department')->find(Auth::user()->id);
+        $withdrawals = Withdrawal::where('user_id',Auth::user()->id)
+        ->orderBy('created_at', 'DESC')
+        ->limit(5)
+        ->get();
+
+        $allWithdrawals = Withdrawal::where('user_id',Auth::user()->id)
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        $total_contribution = Contribution::where('user_id',Auth::user()->id)->sum('amount');
+        $total_withdrawal = Withdrawal::where('user_id',Auth::user()->id)->whereNotNull('approved_date')->sum('amount');
+
+        $balance = $total_contribution - $total_withdrawal;
+        
+
+        return view('pages.profile')->with(["user"=>$user,"withdrawals"=>$withdrawals,"allWithdrawals"=>$allWithdrawals,"balance"=>$balance]);
+
+    }
+
+
+    function update_profile(Request $request){
+
+        $id = Auth::user()->id;
+        $user = Auth::user();
+
+        DB::beginTransaction();
+
+        try{
+
+            $validator = Validator::make($request->all(), [
+                'email' => [
+                    'required',
+                    Rule::unique('users')->ignore($id),
+                ],
+                'phone' => [
+                    'required',
+                    Rule::unique('users')->ignore($id),
+                ],
+                'username' => [
+                    'required',
+                    Rule::unique('users')->ignore($id),
+                ],
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'address' => 'required',
+                'job_description' => 'required',
+                'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            if ($validator->fails()) {
+                
+                return redirect(route('edit_profile'))
+                            ->withErrors($validator)
+                            ->withInput();
+
+            }
+
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $user->job_description = $request->job_description;
+
+            if(!empty($request->picture)){
+
+                $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+                request()->picture->move(public_path('uploads/profile/images'), $imageName);
+                $user->picture_url = 'uploads/profile/images/'.$imageName;
+            }
+
+            $user->save();
+ 
+            DB::commit();
+
+            $request->session()->flash('alert-success', 'Profile Updated Successfully');
+                return redirect('profile');
+
+        }catch(\Exception $ex){
+
+            
+            DB::rollBack();
+            $request->session()->flash('alert-danger', 'Updating User Account Failed');
+            return redirect(route('edit_profile'));
+
+        }
+
+    }
+
+
+    function change_password(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'new_password' => 'required|confirmed|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            
+            return redirect(route('change_password'))
+                        ->withErrors($validator)
+                        ->withInput();
+
+        }
+
+
+        if ( !Hash::check($request->password, Auth::user()->password) ) {
+            $request->session()->flash('alert-danger', 'Your current password is incorrect.');
+            return redirect(route('change_password'));
+        }
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        $request->session()->flash('alert-success', 'Password Updated Successfully');
+        return redirect('change_password');
 
     }
 
