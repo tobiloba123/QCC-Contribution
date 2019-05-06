@@ -80,7 +80,17 @@ Route::group(array('middleware' => 'auth'), function(){
             return view('pages.initiate_report');
         })->name('report');
     
-    
+
+        Route::get('/withdraw_report','ReportController@withdraw_report')->name('withdraw_report');
+        Route::get('/contribution_report','ReportController@contribution_report')->name('contribution_report');
+        Route::get('/employee_contribution_report','ReportController@employee_contribution_report')->name('employee_contribution_report');
+        Route::post('/employee_contribution_report','ReportController@employee_contribution_report_process')->name('employee_contribution_report');
+
+        //Advanced Search
+        Route::post('/withdraw_report','ReportController@withdraw_report_advance')->name('withdraw_report');
+        Route::post('/contribution_report','ReportController@contribution_report_advance')->name('contribution_report');
+        
+
     });
     
     

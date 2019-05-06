@@ -1,6 +1,6 @@
 @extends("index")
 
-@section("title", 'Dashboard')
+@section("title", 'Report')
 
 @section("content")
 
@@ -23,7 +23,7 @@
             
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"></div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-            <a href="#">
+            <a href="{{ route('withdraw_report') }}">
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title h3">Withdrawals Report</h5>
@@ -32,7 +32,7 @@
             </a>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-            <a href="#">
+            <a href="{{ route('contribution_report') }}">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title h3">Contributions Report</h5>
@@ -45,9 +45,9 @@
     <br/><br/>
     <div class="row top_tiles">
             
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"></div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-                <a href="#">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center">
+                <a href="{{ route('employee_contribution_report') }}">
                     <div class="card">
                         <div class="card-body">
                           <h5 class="card-title h3">Employee Contribution</h5>
@@ -55,16 +55,7 @@
                     </div>
                 </a>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center">
-                <a href="#">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title h3">Department Transaction</h5>
-                        </div>
-                    </div>
-                </a>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"></div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
     </div>
 
 
