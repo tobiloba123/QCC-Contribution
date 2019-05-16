@@ -81,6 +81,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->job_description = $request->job_description;
+            $user->salary = $request->salary;
             $user->password = Hash::make($request->password);
 
             if(!empty($request->picture)){
@@ -214,6 +215,7 @@ class UserController extends Controller
             $user->phone = $request->phone;
             $user->address = $request->address;
             $user->job_description = $request->job_description;
+            $user->salary = $request->salary;
 
             if(!empty($request->picture)){
 
