@@ -38,12 +38,34 @@
                     </div>
                   </div>
                   <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Amount <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Percentage / Amount <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="decimal" name="amount" required class="form-control col-md-7 col-xs-12">
+                          <input type="decimal" name="amount" required class="form-control col-md-7 col-xs-12" max="100" min="0">
                         </div>
                       </div>
+                  
+                  <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="">Type / Class <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+
+                          <!-- Default inline 1-->
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="defaultInline1" name="class" value="1" required/>
+                            <label class="custom-control-label" for="defaultInline1">&nbsp; Amount</label>
+                          </div>
+                          
+                          <!-- Default inline 2-->
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="defaultInline2" name="class" value="0" required/>
+                            <label class="custom-control-label" for="defaultInline2">&nbsp; Percentage</label>
+                          </div>
+
+                      </div>
+
+                  </div>
+
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

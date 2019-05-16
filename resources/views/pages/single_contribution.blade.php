@@ -53,7 +53,13 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <select name="contribution_type_id" class="form-control col-md-7 col-xs-12">
                                 @foreach($contribution_types as $contribution_type)
-                                    <option value="{{ $contribution_type->id }}">{{ $contribution_type->name.' ('.env('APP_CURRENCY').' '.$contribution_type->amount.')' }}</option>
+                                    <option value="{{ $contribution_type->id }}">
+                                        @if($contribution_type->class == "1")
+                                        {{ $contribution_type->name.' ('.env('APP_CURRENCY') }} {{ $contribution_type->amount .')' }}
+                                      @else
+                                        {{ $contribution_type->name.' ('.$contribution_type->amount .'%)' }}
+                                      @endif
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

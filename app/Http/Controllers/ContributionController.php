@@ -44,7 +44,17 @@ class ContributionController extends Controller
         $contribution->contribution_type_id = $request->contribution_type_id;
 
         $contributionType = ContributionType::find($request->contribution_type_id);
-        $contribution->amount = $contributionType->amount;
+
+        if($contributionType->class == "0"){
+
+            $user = User::find($request->user_id);
+            $amount = ($contributionType->amount/100) * $user->salary;
+            $contribution->amount = $amount;
+
+        }else{
+            $contribution->amount = $contributionType->amount;
+        }
+
         $contribution->remark = $request->remark;
         $contribution->save();
 

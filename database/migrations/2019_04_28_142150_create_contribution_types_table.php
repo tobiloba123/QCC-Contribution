@@ -17,6 +17,7 @@ class CreateContributionTypesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->double('amount',10,2)->nullable();
+            $table->enum('class', ['0', '1'])->default('0');
             $table->unsignedBigInteger('creator_id');
             $table->timestamps();
             $table->softDeletes();

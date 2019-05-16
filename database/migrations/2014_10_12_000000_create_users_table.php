@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('username')->unique();
             $table->string('address');
+            $table->double('salary',10,2)->default(0);
             $table->string('job_description')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

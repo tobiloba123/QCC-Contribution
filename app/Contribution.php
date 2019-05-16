@@ -10,6 +10,11 @@ class Contribution extends Model
     //
     use SoftDeletes;
 
+    protected $fillable = [
+        'user_id', 'amount', 'approver_id', 'contribution_type_id','remark',
+    ];
+
+
     public function creditor()
     {
         return $this->hasOne('App\User', 'id','approver_id');

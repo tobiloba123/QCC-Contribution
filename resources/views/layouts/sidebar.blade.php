@@ -25,6 +25,11 @@
                       <li><a href="{{ route('report') }}"><i class="fa fa-file"></i> Report </a> </li>
                   @endhasanyrole
                   
+                  @hasanyrole('Admin|Super-Admin')
+                      <hr/>
+                      <li><a href="{{ route('import') }}"><i class="fa fa-upload"></i> Import </a> </li>
+                  @endhasanyrole
+
                 </ul>
               </div>
 

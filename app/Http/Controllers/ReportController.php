@@ -17,7 +17,7 @@ class ReportController extends Controller
         ->withTrashed()
         ->orderBy('created_at','DESC')
         ->paginate(20);
-        return view('pages.with_drawals_report')->with('withdrawals', $withdrawals);
+        return view('pages.with_drawals_report')->with(['withdrawals' => $withdrawals,'keyword' => '']);
 
     }
 
@@ -31,7 +31,7 @@ class ReportController extends Controller
         ->whereOr('approved_date','like','%' . $request->keyword . '%')
         ->whereOr('created_at','like','%' . $request->keyword . '%')
         ->paginate(20);
-        return view('pages.with_drawals_report')->with('withdrawals', $withdrawals);
+        return view('pages.with_drawals_report')->with(['withdrawals' => $withdrawals,'keyword' => $request->keyword]);
 
     }
 
@@ -43,7 +43,7 @@ class ReportController extends Controller
         ->withTrashed()
         ->orderBy('created_at','DESC')
         ->paginate(20);
-        return view('pages.contributions_report')->with(["contributions"=>$contributions]);
+        return view('pages.contributions_report')->with(["contributions"=>$contributions,'keyword' => '']);
 
     }
 
@@ -58,7 +58,7 @@ class ReportController extends Controller
         ->whereOr('approved_date','like','%' . $request->keyword . '%')
         ->whereOr('created_at','like','%' . $request->keyword . '%')
         ->paginate(20);
-        return view('pages.contributions_report')->with(["contributions"=>$contributions]);
+        return view('pages.contributions_report')->with(["contributions"=>$contributions,'keyword' => $request->keyword]);
 
     }
 
@@ -76,7 +76,7 @@ class ReportController extends Controller
         ->withTrashed()
         ->orderBy('created_at','DESC')
         ->paginate(20);
-        return view('pages.employee_contributions_report')->with(["contributions"=>$contributions]);
+        return view('pages.employee_contributions_report')->with(["contributions"=>$contributions,'keyword' => $request->user_id]);
 
     }
 

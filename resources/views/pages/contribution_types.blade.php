@@ -39,7 +39,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Amount</th>
+                  <th>Percentage/Amount</th>
                   <th>Created By</th>
                   <th>Status</th>
                   <th>Created On</th>
@@ -53,7 +53,15 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $contributionType->name }} </td>
-                        <td>{{ env('APP_CURRENCY') }} {{ $contributionType->amount }} </td>
+                        <td>
+                          
+                          @if($contributionType->class == "1")
+                            {{ env('APP_CURRENCY') }} {{ $contributionType->amount }} 
+                          @else
+                            {{ $contributionType->amount }}% 
+                          @endif
+                          
+                        </td>
                         <td>{{ $contributionType->creator->fullname }} </td>
                         <td>
 

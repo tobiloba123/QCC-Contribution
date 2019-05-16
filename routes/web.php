@@ -91,6 +91,31 @@ Route::group(array('middleware' => 'auth'), function(){
         Route::post('/contribution_report','ReportController@contribution_report_advance')->name('contribution_report');
         
 
+        //Importing Data
+        Route::post('/process_user_import','ImportController@user_import')->name('process_user_import');
+        Route::post('/process_contribution_import','ImportController@contribution_import')->name('process_contribution_import');
+        
+        Route::get('/import',function () {
+            return view('pages.initiate_import');
+        })->name('import');
+
+        Route::get('/contribution_import',function () {
+            return view('pages.contribution_import');
+        })->name('contribution_import');
+
+        Route::get('/user_import',function () {
+            return view('pages.user_import');
+        })->name('user_import');
+          
+
+        //GENERATING EXCEL EXPORT
+        Route::get('/export_excel_withdrawals/{keyword}','ExportController@withdrawal_export')->name('export_excel_withdrawal');
+        Route::get('/export_excel_withdrawals','ExportController@withdrawal_export_all')->name('export_excel_withdrawals');
+        Route::get('/export_excel_contributions/{keyword}','ExportController@contribution_export')->name('export_excel_contribution');
+        Route::get('/export_excel_contributions','ExportController@contribution_export_all')->name('export_excel_contributions');
+        Route::get('/export_excel_employee_contributions/{id}','ExportController@employee_contribution_export_all')->name('export_excel_employee_contributions');
+        
+
     });
     
     

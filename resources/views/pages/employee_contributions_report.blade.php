@@ -62,6 +62,7 @@
                         <h2>Employee Contributions Report</h2>
                         <ul class="nav navbar-right panel_toolbox">
                                 <li><a href="#" class="btn btn-danger btn-lg"><i class="fa fa-file"></i> PDF</a></li>
+                                <li><a target="_blank" href="{{ route('export_excel_employee_contributions',$keyword) }}" class="btn btn-success btn-lg"><i class="fa fa-file"></i> EXCEL</a></li>
                             </ul>
                         <div class="clearfix"></div>
                     </div>

@@ -27,6 +27,7 @@ class ContributionTypeController extends Controller
         $contributionType = new ContributionType();
         $contributionType->name = $request->name;
         $contributionType->amount = $request->amount;
+        $contributionType->class = $request->class;
         $contributionType->creator_id = Auth::user()->id;
         $contributionType->save();
 
