@@ -114,6 +114,13 @@ Route::group(array('middleware' => 'auth'), function(){
         Route::get('/export_excel_contributions/{keyword}','ExportController@contribution_export')->name('export_excel_contribution');
         Route::get('/export_excel_contributions','ExportController@contribution_export_all')->name('export_excel_contributions');
         Route::get('/export_excel_employee_contributions/{id}','ExportController@employee_contribution_export_all')->name('export_excel_employee_contributions');
+
+        //GENERATING PDF EXPORT
+         Route::get('/export_pdf_withdrawals/{keyword}','ExportController@withdrawal_export_pdf')->name('export_pdf_withdrawal');
+         Route::get('/export_pdf_withdrawals','ExportController@withdrawal_export_all_pdf')->name('export_pdf_withdrawals');
+         Route::get('/export_pdf_contributions/{keyword}','ExportController@contribution_export_pdf')->name('export_pdf_contribution');
+         Route::get('/export_pdf_contributions','ExportController@contribution_export_all_pdf')->name('export_pdf_contributions');
+         Route::get('/export_pdf_employee_contributions/{id}','ExportController@employee_contribution_export_all_pdf')->name('export_pdf_employee_contributions');
         
 
     });

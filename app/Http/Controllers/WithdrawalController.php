@@ -13,7 +13,7 @@ class WithdrawalController extends Controller
 
 
     function index(Request $request){
-        $withdrawals = Withdrawal::with("approver","user")->where('user_id',Auth::user()->id)
+        $withdrawals = Withdrawal::with("approver","user")
         ->whereNull('approved_date')->paginate(20);
         return view('pages.withdrawals')->with(["withdrawals"=>$withdrawals]);
     }

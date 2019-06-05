@@ -24,7 +24,13 @@
           <div class="x_title">
             <h2>Contributions Report</h2>
             <ul class="nav navbar-right panel_toolbox">
-                <li><a href="#" class="btn btn-danger btn-lg"><i class="fa fa-file"></i> PDF</a></li>
+
+                @if(empty($keyword))
+                        <li><a href="{{ route('export_pdf_contributions') }}" class="btn btn-danger btn-lg"><i class="fa fa-file"></i> PDF</a></li>
+                    @else
+                        <li><a href="{{ route('export_pdf_contribution',$keyword) }}" class="btn btn-danger btn-lg"><i class="fa fa-file"></i> PDF</a></li>
+                    @endif
+
                 @if(empty($keyword))
                     <li><a target="_blank" href="{{ route('export_excel_contributions') }}" class="btn btn-success btn-lg"><i class="fa fa-file"></i> EXCEL</a></li>
                 @else

@@ -54,6 +54,32 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
     </div>
+    
+    <br/>
+    
+    <div class="row top_tiles">
+            
+        <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
+      <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 text-center">
+            
+            Please Arrange The Excel file columns in any formart but must include the listed columns below <br/><br/>
+        <table id="datatable-buttons" class="table table-striped table-bordered">
+          <tbody>
+              <tr>
+                  <td>amount</td>
+                  <td>user_id</td>
+                  <td>approver_id</td>
+                  <td>contribution_type_id</td>
+                  <td>remark</td>
+              </tr>
+          </tbody>
+      </table>
+            
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
+    </div>
+    
+    
   </div>
 
 @else
