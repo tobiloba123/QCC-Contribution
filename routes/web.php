@@ -11,6 +11,11 @@
 |
 */
 
+
+
+//Route::get('/upload','UserController@upload');
+
+
 Route::get('/login', function () {
     return view('auth.login');
 })->name("login");

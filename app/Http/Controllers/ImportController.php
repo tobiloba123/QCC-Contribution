@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Imports\UsersImport;
 use App\Imports\ContributionsImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -57,6 +58,7 @@ class ImportController extends Controller
 
         } catch (\Exception $e) {
             
+            Log::info($e);
             $request->session()->flash('alert-danger', 'Contributions Import Failed');
             return redirect('contribution_import');
             
@@ -69,6 +71,8 @@ class ImportController extends Controller
                  $failure->errors(); // Actual error messages from Laravel validator
                  $failure->values(); // The values of the row that has failed.
              }
+
+             Log::info($failures);
 
              $request->session()->flash('alert-danger', 'Contributions Import Failed');
             return redirect('contribution_import');

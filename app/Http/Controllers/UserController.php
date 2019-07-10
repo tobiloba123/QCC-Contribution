@@ -18,11 +18,32 @@ class UserController extends Controller
 {
     //
 
+
+    function upload(){
+
+        $users = User::get();
+
+        foreach($users as $user){
+
+            //adding user to department
+            $userDepartment = new UserDepartment();
+            $userDepartment->department_id = 1;
+            $userDepartment->user_id = $user->id;
+            $userDepartment->save();
+            //adding role to user
+            $user->assignRole("Employee");
+
+        }
+
+    }
+
     function index(Request $request){
 
         $users = User::with('user_department')
         ->with('user_department.department')
-        ->withTrashed()->get();
+        ->withTrashed()
+        ->orderBy('created_at','desc')
+        ->paginate(50);
 
         return view('pages.users')->with(["users"=>$users]);    
 
