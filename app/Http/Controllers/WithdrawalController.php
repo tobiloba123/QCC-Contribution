@@ -49,6 +49,7 @@ class WithdrawalController extends Controller
         $withdrawal = Withdrawal::find($id);
         $withdrawal->approver_id = Auth::user()->id;
         $withdrawal->approved_date = Carbon::now();
+        $withdrawal->status = "success";
         $withdrawal->save();
         $request->session()->flash('alert-success', 'Withdrawal Request Approved Successfully');
         return redirect('withdrawals');
