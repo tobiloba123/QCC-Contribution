@@ -46,15 +46,23 @@
               </thead>
 
               <tbody>
-
-                    <tr>
-                        <td>1</td>
-                        <td>
-                            {{ date("d M Y \\a\\t h:m a", strtotime($interest->created_at)) }}
-                        </td>
-                        <td>{{ $interest->amount }}</td>
-                        <td>{{ $interest->approver->first_name." ".$interest->approver->last_name }} </td>
-                    </tr>
+                    
+                    @if( !empty($interest) )
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                {{ date("d M Y \\a\\t h:m a", strtotime($interest->created_at)) }}
+                            </td>
+                            <td>{{ $interest->amount }}</td>
+                            <td>{{ $interest->approver->first_name." ".$interest->approver->last_name }} </td>
+                        </tr>
+                    @else
+                        <tr>
+                            <td colspan="4" class="text-center">
+                                NO INTEREST
+                            </td>
+                        </tr>
+                    @endif
                 
               </tbody>
             </table>

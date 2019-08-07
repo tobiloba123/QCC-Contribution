@@ -130,15 +130,37 @@ class ExportController extends Controller
 
         $user = User::find($id);
         $roll_over = RollOver::where('user_id',$user->id)->orderBy('id','DESC')->first();
-        $contributions = Contribution::with('creditor','contribution_type','user')
-        ->orderBy('created_at','ASC')
-        ->whereDate('created_at', '>=' ,$roll_over->end_date)
-        ->where('user_id',$id)->get();
+        
+        if( !empty($roll_over) ){
+            
+            $contributions = Contribution::with('creditor','contribution_type','user')
+            ->orderBy('created_at','ASC')
+            ->whereDate('created_at', '>=' ,$roll_over->end_date)
+            ->where('user_id',$id)->get();
+        
+        }else{
+            
+            $contributions = Contribution::with('creditor','contribution_type','user')
+            ->orderBy('created_at','ASC')
+            ->where('user_id',$id)->get();
+            
+        }
 
         $interest = Interest::orderBy('id','DESC')->first();
-        $withdrawal = Withdrawal::where('user_id',$user->id)
-        ->whereDate('created_at', '>=' ,$roll_over->end_date)
-        ->sum('amount');
+        
+        if( !empty($roll_over) ){
+            
+            $withdrawal = Withdrawal::where('user_id',$user->id)
+            ->whereDate('created_at', '>=' ,$roll_over->end_date)
+            ->sum('amount');
+        
+        }else{
+            
+            $withdrawal = Withdrawal::where('user_id',$user->id)
+            ->sum('amount');
+            
+        }
+        
 
         $data = ['user'          => $user,
                  'roll_over'     => $roll_over,
@@ -149,7 +171,7 @@ class ExportController extends Controller
         
         $pdf = PDF::loadView('pdf/employee_contributions_formatted', $data);
 
-        return $pdf->stream();
+        //return $pdf->stream();
         return $pdf->download('employee-contributions-report.pdf');
 
     }
