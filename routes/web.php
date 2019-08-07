@@ -158,6 +158,15 @@ Route::group(array('middleware' => 'auth'), function(){
     
     //Route::get('/report','ReportController@index')->name('report');
     
+    //RollOver Functions
+    Route::get('/rollover','RollOverController@index')->name('roll_over');
+    Route::post('/rollover','RollOverController@store')->name('process_roll_over');
+
+    //Interest Functions
+    Route::get('/interest','InterestController@index')->name('interest');
+    Route::post('/interest','InterestController@store')->name('process_interest');
+    
+    
     
 
 });

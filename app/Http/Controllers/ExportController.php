@@ -10,7 +10,11 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Contribution;
 use App\Withdrawal;
+use App\User;
+use App\RollOver;
+use App\Interest;
 use PDF;
+use Carbon\Carbon;
 
 class ExportController extends Controller
 {
@@ -27,7 +31,6 @@ class ExportController extends Controller
         return (new WithdrawalsExport(""))->download('withdrawals-report.xlsx');
 
     }
-
 
     public function contribution_export(Request $request,$keyword){
 
@@ -114,6 +117,7 @@ class ExportController extends Controller
 
     public function employee_contribution_export_all_pdf(Request $request,$id){
 
+        /*
         $data = Contribution::with('creditor','contribution_type','user')
         ->withTrashed()
         ->orderBy('created_at','DESC')
@@ -121,7 +125,31 @@ class ExportController extends Controller
 
         $data = ['contributions' => $data];
         $pdf = PDF::loadView('pdf/employee_contributions', $data);
-  
+        */
+
+
+        $user = User::find($id);
+        $roll_over = RollOver::where('user_id',$user->id)->orderBy('id','DESC')->first();
+        $contributions = Contribution::with('creditor','contribution_type','user')
+        ->orderBy('created_at','ASC')
+        ->whereDate('created_at', '>=' ,$roll_over->end_date)
+        ->where('user_id',$id)->get();
+
+        $interest = Interest::orderBy('id','DESC')->first();
+        $withdrawal = Withdrawal::where('user_id',$user->id)
+        ->whereDate('created_at', '>=' ,$roll_over->end_date)
+        ->sum('amount');
+
+        $data = ['user'          => $user,
+                 'roll_over'     => $roll_over,
+                 'contributions' => $contributions,
+                 'interest'      => $interest,
+                 'withdrawal'    => $withdrawal];
+
+        
+        $pdf = PDF::loadView('pdf/employee_contributions_formatted', $data);
+
+        return $pdf->stream();
         return $pdf->download('employee-contributions-report.pdf');
 
     }

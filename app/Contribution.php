@@ -15,6 +15,18 @@ class Contribution extends Model
     ];
 
 
+    public function getFormattedDateAttribute()
+    {
+        $startDate = strtoupper(date("F Y", strtotime($this->created_at)));
+        return "{$startDate}";
+    }
+
+    public function getFormattedAmountAttribute()
+    {
+        $amount = number_format( $this->amount, 2 );
+        return "{$amount}";
+    }
+
     public function creditor()
     {
         return $this->hasOne('App\User', 'id','approver_id');

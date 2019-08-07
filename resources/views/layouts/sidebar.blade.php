@@ -24,6 +24,14 @@
                   <!-- Reports -->
                       <li><a href="{{ route('report') }}"><i class="fa fa-file"></i> Report </a> </li>
                   @endhasanyrole
+
+                  @hasanyrole('Admin|Super-Admin')
+                      <li><a href="{{ route('interest') }}"><i class="fa fa-money"></i> Interest </a> </li>
+                  @endhasanyrole
+
+                  @hasanyrole('Admin|Super-Admin')
+                      <li><a href="{{ route('roll_over') }}"><i class="fa fa-clone"></i> Roll Over </a> </li>
+                  @endhasanyrole
                   
                   @hasanyrole('Admin|Super-Admin')
                       <hr/>
